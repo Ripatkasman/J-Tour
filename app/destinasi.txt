@@ -1,0 +1,20 @@
+DEST006|Gunung Merapi|Alam|Sleman|Destinasi wisata petualangan jeep lava tour menyusuri sisa bunker dan material erupsi yang eksotis.
+DEST011|Museum Sonobudoyo|Museum|Kota Jogja|Museum sejarah dan kebudayaan Jawa terlengkap di Yogyakarta yang menyimpan koleksi keris topeng kuno hingga artefak purbakala.
+DEST012|Warung Kandang Ingkung|Kuliner|Bantul|Resto bernuansa pedesaan khas Jawa yang menyajikan menu andalan ayam ingkung gurih otentik dengan lalapan segar.
+DEST013|Obelix Sea View|Hiburan|Bantul|Destinasi wisata modern di atas bukit pesisir selatan yang menawarkan pemandangan laut lepas berpadu spot foto estetik.
+DEST014|Ayam Goreng Lombok Idjo|Kuliner|Kota Jogja|Rumah makan populer yang terkenal dengan sajian ayam goreng kremes renyah berpadu sambal ijo yang khas dan menggugah selera.
+DEST015|Jalan Prawirotaman|Budaya|Kota Jogja|Kawasan kampung turis internasional yang terkenal dengan deretan kafe estetik hotel butik dan suasana santai lintas budaya.
+DEST016|Via Via Bakery|Kuliner|Kota Jogja|Toko roti organik legendaris di Prawirotaman yang menyajikan roti artisan kue sehat dan produk ramah lingkungan tanpa pengawet.
+DEST017|Tempo Gelato|Kuliner|Kota Jogja|Kedai es krim gelato super populer dengan puluhan varian rasa otentik dan desain bangunan bergaya Eropa klasik.
+DEST018|VW Trip Borobudur|Hiburan|Sleman|Paket petualangan keliling desa wisata menaiki mobil klasik VW Safari antik dengan pemandangan sawah dan perbukitan.
+DEST019|Wisata Rafting Elo|Alam|Sleman|Aktivitas pemacu adrenalin menyusuri jeram sungai menggunakan perahu karet bersama tim pemandu profesional yang sangat seru.
+DEST020|Petilasan Mbah Maridjan|Budaya|Sleman|Situs bersejarah sisa rumah sang juru kunci Merapi yang menjadi saksi bisu kedahsyatan erupsi besar tahun dua ribu sepuluh.
+DEST021|ATV Trip Kaliurang|Hiburan|Sleman|Petualangan seru mengendarai motor roda empat ATV melintasi jalur tanah berbatu dan kubangan air di lereng Merapi.
+DEST002|Pantai Parangtritis|Alam|Bantul|Pantai ikonik selatan Jogja dengan pemandangan sunset yang indah gundukan pasir mistis dan ombak besar.
+DEST003|Gudeg Wijilan|Kuliner|Kota Jogja|Sentra kuliner gudeg khas Jogja yang menawarkan cita rasa manis otentik legendaris sejak puluhan tahun lalu.
+DEST004|Jalan Malioboro|Belanja|Kota Jogja|Kawasan jalanan pusat belanja oleh-oleh kerajinan souvenir dan jajanan pasar tradisional khas Yogyakarta.
+DEST005|Gembira Loka Zoo|Hiburan|Kota Jogja|Kebun binatang edukatif yang luas dengan berbagai koleksi satwa lengkap dan wahana rekreasi air ramah anak.
+DEST007|Keraton Yogyakarta|Budaya|Kota Jogja|Istana resmi Kesultanan Ngayogyakarta Hadiningrat yang menyimpan warisan sejarah dan budaya Jawa yang hidup.
+DEST008|Tebing Breksi|Alam|Sleman|Taman wisata bekas penambangan batu kapur yang dipahat dengan ukiran seni seniman lokal yang sangat megah.
+DEST009|HeHa Sky View|Hiburan|Gunungkidul|Tempat nongkrong modern berselimut pemandangan perbukitan hijau dan lampu kota Jogja dari ketinggian yang romantis.
+DEST010|Goa Pindul|Alam|Gunungkidul|Petualangan menyusuri sungai bawah tanah di dalam gua menggunakan ban pelampung dengan pemandangan stalaktit yang indah.

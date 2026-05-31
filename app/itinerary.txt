@@ -1,0 +1,15 @@
+topo@gmail.com|DEST006|1
+topo@gmail.com|DEST014|2
+topo@gmail.com|DEST015|2
+topo@gmail.com|DEST016|3
+sikulu@gmail.com|DEST006|1
+sikulu@gmail.com|DEST011|1
+sikulu@gmail.com|DEST012|1
+sikulu@gmail.com|DEST006|2
+sikulu@gmail.com|DEST011|2
+sikulu@gmail.com|DEST013|2
+sikulu@gmail.com|DEST014|3
+sikulu@gmail.com|DEST011|3
+sikulu@gmail.com|DEST016|3
+rkasman2006@gmail.com|DEST012|7
+rkasman2006@gmail.com|DEST013|7
