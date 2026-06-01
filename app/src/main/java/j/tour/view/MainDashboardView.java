@@ -773,6 +773,17 @@ public class MainDashboardView {
             summaryCard.setPadding(new Insets(8, 12, 8, 12));
             summaryCard.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 5px; -fx-border-color: #cfd8dc; -fx-border-width: 1px;");
 
+            // ✨ 1. JADIKAN KARTU JADWAL BISA DIKLIK & UBAH KURSOR MOUSE
+            summaryCard.setCursor(javafx.scene.Cursor.HAND);
+            summaryCard.setOnMouseClicked(event -> {
+                // Cegah pop-up terbuka jika yang diklik sesungguhnya adalah tombol hapus (Button)
+                if (event.getTarget() instanceof Button) {
+                    return;
+                }
+                // Panggil fungsi pop-up detail bawaan Anda dengan melempar objek Destination
+                showDetailPopup(trip.getDestination());
+            });
+
             Label lblDestName = new Label(trip.getDestination().getName());
             lblDestName.setStyle("-fx-font-size: 13px; -fx-text-fill: #263238;");
             HBox.setHgrow(lblDestName, Priority.ALWAYS);
@@ -780,7 +791,11 @@ public class MainDashboardView {
 
             Button btnRemoveItem = new Button("×");
             btnRemoveItem.setStyle("-fx-background-color: transparent; -fx-text-fill: #c62828; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 0; -fx-cursor: hand;");
+            
             btnRemoveItem.setOnAction(e -> {
+                // ✨ 2. STOP EVENT PROPAGATION (Penting agar klik tidak tembus ke summaryCard induk)
+                e.consume();
+                
                 selectedList.remove(trip);
                 refreshFilterDayButtons(); 
                 refreshItinerarySummary();

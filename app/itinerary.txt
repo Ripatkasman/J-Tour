@@ -15,3 +15,12 @@ rkasman2006@gmail.com|DEST012|7
 rkasman2006@gmail.com|DEST013|7
 ad|DEST052|1
 ad|DEST053|1
+ad|DEST003|1
+ad|DEST004|1
+ad|DEST005|1
+ad|DEST006|1
+ad|DEST007|1
+ad|DEST008|1
+ad|DEST009|1
+ad|DEST010|1
+ad|DEST011|1
