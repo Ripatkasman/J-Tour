@@ -191,14 +191,23 @@ public class AdminDashboardView {
             Label lblDescCard = new Label(dest.getDescription());
             lblDescCard.setStyle("-fx-text-fill: #455a64; -fx-font-size: 13px;");
             lblDescCard.setWrapText(true);
+            
+            // ✨ TAMBAHKAN INI: Memaksa label deskripsi agar lebarnya fleksibel mengalah pada layout 
+            // dan tidak mendorong tombol keluar dari layar
+            lblDescCard.setMaxWidth(Double.MAX_VALUE);
 
             infoColumn.getChildren().addAll(lblHeaderCard, lblWilayahCard, lblDescCard);
 
             VBox actionBox = new VBox(8);
             actionBox.setAlignment(Pos.CENTER);
+            
+            // ✨ TAMBAHKAN INI: Kunci lebar minimum actionBox agar tidak bisa tergencet oleh teks deskripsi
+            actionBox.setMinWidth(80); 
 
             Button btnEdit = new Button("Edit");
-            btnEdit.setStyle("-fx-background-color: #37474f; -fx-text-fill: white;");
+            btnEdit.setStyle("-fx-background-color: #37474f; -fx-text-fill: white; -fx-padding: 6px 12px; -fx-cursor: hand;");
+            // ✨ TAMBAHKAN INI: Kunci lebar minimum tombol Edit agar teksnya tidak menjadi "..."
+            btnEdit.setMinWidth(70); 
             
             btnEdit.setOnAction(e -> {
                 selectedDestinationForEdit = dest;
@@ -214,7 +223,10 @@ public class AdminDashboardView {
             });
 
             Button btnHapus = new Button("Hapus");
-            btnHapus.setStyle("-fx-background-color: #c62828; -fx-text-fill: white;");
+            btnHapus.setStyle("-fx-background-color: #c62828; -fx-text-fill: white; -fx-padding: 6px 12px; -fx-cursor: hand;");
+            // ✨ TAMBAHKAN INI: Kunci lebar minimum tombol Hapus agar teksnya tidak terpotong
+            btnHapus.setMinWidth(70); 
+            
             btnHapus.setOnAction(e -> {
                 Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Hapus " + dest.getName() + "?", ButtonType.YES, ButtonType.NO);
                 confirm.showAndWait().ifPresent(response -> {
