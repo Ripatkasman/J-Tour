@@ -13,3 +13,5 @@ sikulu@gmail.com|DEST011|3
 sikulu@gmail.com|DEST016|3
 rkasman2006@gmail.com|DEST012|7
 rkasman2006@gmail.com|DEST013|7
+ad|DEST013|1
+ad|DEST014|1
