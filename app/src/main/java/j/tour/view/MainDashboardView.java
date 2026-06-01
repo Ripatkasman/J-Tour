@@ -52,6 +52,27 @@ public class MainDashboardView {
             }
         }
     }
+
+    private interface AppNotifier {
+        void notifyUser(String message);
+    }
+
+    private static class SystemAlertNotifier implements AppNotifier {
+        private final Alert.AlertType type;
+
+        public SystemAlertNotifier(Alert.AlertType type) {
+            this.type = type;
+        }
+
+        @Override
+        public void notifyUser(String message) {
+            Alert alert = new Alert(this.type, message, ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+    private void sendNotification(AppNotifier notifier, String message) {
+        notifier.notifyUser(message); 
+    }
     
     public void show(Stage stage) {
         BorderPane root = new BorderPane();
@@ -188,8 +209,8 @@ public class MainDashboardView {
             refreshFilterDayButtons();
             refreshItinerarySummary();
             
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Struktur Rencana Perjalanan Wisata Anda Berhasil Disimpan!", ButtonType.OK);
-            alert.showAndWait();
+            sendNotification(new SystemAlertNotifier(Alert.AlertType.INFORMATION), 
+            "Struktur Rencana Perjalanan Wisata Anda Berhasil Disimpan!");
         });
 
         rightSidebar.getChildren().addAll(lblRightTitle, new Separator(), scrollRight, btnSimpanItinerary);
@@ -217,8 +238,7 @@ public class MainDashboardView {
                 refreshDestinationCards();
                 refreshItinerarySummary();
             } catch (NumberFormatException ex) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Masukkan jumlah durasi hari yang valid (Angka > 0)!");
-                alert.showAndWait();
+                sendNotification(new SystemAlertNotifier(Alert.AlertType.WARNING), "Masukkan jumlah durasi hari yang valid (Angka > 0)!");
             }
         });
 
@@ -328,6 +348,7 @@ public class MainDashboardView {
         cardLoc.getChildren().addAll(locHeader, locContent);
 
         // ==================== TOMBOL AKSI (KANAN BAWAH) ====================
+        
         Button closeButton = new Button("Tutup Detail");
         closeButton.setStyle("-fx-background-color: #0A4B93; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8px 20px; -fx-background-radius: 5px; -fx-cursor: hand;");
         closeButton.setOnAction(e -> popupStage.close());
@@ -507,19 +528,19 @@ public class MainDashboardView {
         btnUpdate.setOnAction(e -> {
             String newPassword = txtPassword.getText().trim();
             if (newPassword.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Silakan isi kata sandi baru terlebih dahulu!", ButtonType.OK);
-                alert.showAndWait();
+                sendNotification(new SystemAlertNotifier(Alert.AlertType.WARNING),
+                 "Silakan isi kata sandi baru terlebih dahulu!");
                 return;
             }
 
             boolean success = TextDatabaseManager.updateUserPassword(currentUserEmail, newPassword);
             if (success) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Profil akun Anda berhasil diperbarui!", ButtonType.OK);
-                alert.showAndWait();
+                sendNotification(new SystemAlertNotifier(Alert.AlertType.INFORMATION), 
+                "Profil akun Anda berhasil diperbarui!");
                 dialog.close();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Gagal memperbarui data akun. Coba beberapa saat lagi.", ButtonType.OK);
-                alert.showAndWait();
+                sendNotification(new SystemAlertNotifier(Alert.AlertType.ERROR), 
+                "Gagal memperbarui data akun. Coba beberapa saat lagi.");
             }
         });
 
@@ -553,8 +574,11 @@ public class MainDashboardView {
                     dialog.close();
                     new LoginView().show(ownerStage);
                     
-                    Alert successAlert = new Alert(Alert.AlertType.INFORMATION, "Akun Anda telah berhasil dihapus dari sistem J-Tour.", ButtonType.OK);
-                    successAlert.showAndWait();
+                    sendNotification(new SystemAlertNotifier(Alert.AlertType.INFORMATION),
+                     "Akun Anda telah berhasil dihapus dari sistem J-Tour.");
+                } else {
+                    sendNotification(new SystemAlertNotifier(Alert.AlertType.ERROR), 
+                    "Gagal menghapus akun. Coba beberapa saat lagi.");
                 }
             }
         });
@@ -805,5 +829,4 @@ public class MainDashboardView {
             return assignedDay;
         }
     }
-    
 }
