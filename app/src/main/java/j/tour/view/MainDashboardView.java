@@ -763,24 +763,58 @@ public class MainDashboardView {
         VBox dayGroupNode = new VBox(8);
         dayGroupNode.setPadding(new Insets(5, 0, 10, 0));
 
+        // ✨ 1. BUAT CONTAINER UNTUK HEADER DAN TOMBOL RESET HARI INI
+        HBox headerRow = new HBox();
+        headerRow.setAlignment(Pos.CENTER_LEFT);
+        
         Label lblDayHeader = new Label("📅 JADWAL HARI " + selectedFilterDay);
         lblDayHeader.setStyle("-fx-font-weight: bold; -fx-font-size: 12px; -fx-text-fill: #1565c0;");
-        dayGroupNode.getChildren().add(lblDayHeader);
+        
+        // Spacer untuk mendorong tombol reset ke ujung kanan
+        Region headerSpacer = new Region();
+        HBox.setHgrow(headerSpacer, Priority.ALWAYS);
 
+        // ✨ 2. TOMBOL RESET BERWARNA BIRU (KHUSUS HARI YANG DIPILIH)
+        Button btnResetDay = new Button("Reset Hari Ini");
+        btnResetDay.setStyle(
+            "-fx-background-color: #0d47a1; " + // Warna biru utama senada dengan tema aplikasi
+            "-fx-text-fill: white; " +
+            "-fx-font-size: 10px; " +
+            "-fx-font-weight: bold; " +
+            "-fx-background-radius: 4px; " +
+            "-fx-padding: 4px 8px; " +
+            "-fx-cursor: hand;"
+        );
+
+        // Aksi tombol reset hari ini
+        btnResetDay.setOnAction(e -> {
+            // Hapus isi selectedList yang HANYA sesuai dengan hari aktif saat ini
+            selectedList.removeIf(t -> t.getAssignedDay() == selectedFilterDay);
+            
+            // Refresh semua komponen terkait
+            refreshFilterDayButtons(); 
+            refreshItinerarySummary();
+            
+            btnLihatSemua.setDisable(true);
+            btnLihatSemua.setStyle("-fx-background-color: transparent; -fx-text-fill: #b0bec5; -fx-font-size: 13px; -fx-cursor: default;");
+        });
+
+        // Masukkan label, spacer, dan tombol biru ke baris header
+        headerRow.getChildren().addAll(lblDayHeader, headerSpacer, btnResetDay);
+        dayGroupNode.getChildren().add(headerRow);
+
+        // Perulangan item destinasi di hari tersebut
         for (SelectedDayTrip trip : tripsForDay) {
             HBox summaryCard = new HBox(10);
             summaryCard.setAlignment(Pos.CENTER_LEFT);
             summaryCard.setPadding(new Insets(8, 12, 8, 12));
             summaryCard.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 5px; -fx-border-color: #cfd8dc; -fx-border-width: 1px;");
 
-            // ✨ 1. JADIKAN KARTU JADWAL BISA DIKLIK & UBAH KURSOR MOUSE
             summaryCard.setCursor(javafx.scene.Cursor.HAND);
             summaryCard.setOnMouseClicked(event -> {
-                // Cegah pop-up terbuka jika yang diklik sesungguhnya adalah tombol hapus (Button)
                 if (event.getTarget() instanceof Button) {
                     return;
                 }
-                // Panggil fungsi pop-up detail bawaan Anda dengan melempar objek Destination
                 showDetailPopup(trip.getDestination());
             });
 
@@ -793,9 +827,7 @@ public class MainDashboardView {
             btnRemoveItem.setStyle("-fx-background-color: transparent; -fx-text-fill: #c62828; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 0; -fx-cursor: hand;");
             
             btnRemoveItem.setOnAction(e -> {
-                // ✨ 2. STOP EVENT PROPAGATION (Penting agar klik tidak tembus ke summaryCard induk)
                 e.consume();
-                
                 selectedList.remove(trip);
                 refreshFilterDayButtons(); 
                 refreshItinerarySummary();
