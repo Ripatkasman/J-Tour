@@ -371,9 +371,10 @@ public class MainDashboardView {
         
     }
     private void refreshCategoryFilterRow() {
-        categoryFilterButtonsContainer.getChildren().clear();
+        // Clear wrapper pencarian dan filter di setiap refresh
         searchAndFilterWrapper.getChildren().clear(); 
 
+        // 1. Ambil semua kategori unik dari DataStore seperti biasa
         Set<String> categories = new HashSet<>();
         for (Destination dest : DataStore.getInstance().getAllDestinations()) {
             if (dest.getCategory() != null && !dest.getCategory().trim().isEmpty()) {
@@ -385,26 +386,37 @@ public class MainDashboardView {
         sortedCategories.add("Semua"); 
         sortedCategories.addAll(categories);
 
-        for (String cat : sortedCategories) {
-            Button btnFilter = new Button(cat);
-            btnFilter.setPrefHeight(26);
-            btnFilter.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-background-radius: 20px; -fx-padding: 4px 12px 4px 12px; -fx-cursor: hand;");
+        // 2. Buat komponen Dropdown (ComboBox) untuk Kategori
+        ComboBox<String> cbCategoryFilter = new ComboBox<>();
+        cbCategoryFilter.getItems().addAll(sortedCategories);
+        cbCategoryFilter.setPrefHeight(28);
+        cbCategoryFilter.setPrefWidth(180); // Atur lebar dropdown agar pas dan estetik
+        
+        // Styling Dropdown agar senada dengan tema J-Tour
+        cbCategoryFilter.setStyle(
+            "-fx-font-size: 12px; " +
+            "-fx-font-weight: bold; " +
+            "-fx-background-color: #f5f5f5; " +
+            "-fx-background-radius: 15px; " +
+            "-fx-border-radius: 15px; " +
+            "-fx-border-color: #cfd8dc; " +
+            "-fx-cursor: hand;"
+        );
 
-            if (selectedCategoryFilter.equalsIgnoreCase(cat)) {
-                btnFilter.setStyle(btnFilter.getStyle() + "-fx-background-color: #0d47a1; -fx-text-fill: white;");
-            } else {
-                btnFilter.setStyle(btnFilter.getStyle() + "-fx-background-color: #e0e0e0; -fx-text-fill: #424242;");
-            }
+        // Set nilai dropdown agar sesuai dengan kategori yang sedang aktif/dipilih
+        cbCategoryFilter.setValue(selectedCategoryFilter);
 
-            btnFilter.setOnAction(e -> {
-                selectedCategoryFilter = cat;
-                refreshCategoryFilterRow(); 
+        // Aksi ketika admin/user memilih salah satu kategori di dropdown
+        cbCategoryFilter.setOnAction(e -> {
+            String selected = cbCategoryFilter.getValue();
+            if (selected != null) {
+                selectedCategoryFilter = selected;
+                // Panggil refresh card untuk menyaring data sesuai pilihan baru
                 refreshDestinationCards();   
-            });
+            }
+        });
 
-            categoryFilterButtonsContainer.getChildren().add(btnFilter);
-        }
-
+        // 3. Komponen Pencarian Teks (TextField)
         TextField txtSearch = new TextField(searchQuery);
         txtSearch.setPromptText("🔍 Cari nama destinasi...");
         txtSearch.setPrefHeight(28);
@@ -423,8 +435,14 @@ public class MainDashboardView {
             }
         });
 
-        searchAndFilterWrapper.getChildren().addAll(txtSearch, categoryFilterButtonsContainer);
+        // 4. Masukkan TextField Pencarian dan Dropdown Kategori ke dalam wrapper utama
+        searchAndFilterWrapper.getChildren().addAll(txtSearch, cbCategoryFilter);
+        
+        // Atur layouting agar komponen berjarak rapi jika searchAndFilterWrapper bertipe HBox
+        searchAndFilterWrapper.setSpacing(12); 
     }
+
+    
 
     private void refreshDestinationCards() {
         destinationCardsContainer.getChildren().clear();
