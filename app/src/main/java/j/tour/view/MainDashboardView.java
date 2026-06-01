@@ -282,28 +282,28 @@ public class MainDashboardView {
         root.setPrefWidth(460); // Lebar ideal yang pas dan kompak
         root.setMaxWidth(460);
 
-        // 3. Header Judul Utama (Biru Tua & Tebal)
+        
         Label headerLabel = new Label("DETAIL INFORMASI DESTINASI");
         headerLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0A4B93;");
 
-        // 4. Sub-judul Informasi (Teks Abu-abu)
+     
         Label subtitleLabel = new Label("Menampilkan informasi lengkap mengenai tempat kunjungan terpilih:");
         subtitleLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #666666;");
 
-        // ==================== KARTU UTAMA: NAMA & KATEGORI ====================
+     
         VBox cardInfo = new VBox(10);
         cardInfo.setPadding(new Insets(15));
         cardInfo.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #E2E0D9; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
         
         Label infoHeader = new Label( destination.getName().toUpperCase());
-        infoHeader.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0A4B93;"); // Oranye J-Tour
+        infoHeader.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0A4B93;"); 
         
         Label categoryLabel = new Label("Kategori Tempat: " + destination.getCategory());
         categoryLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #333333;");
         
         cardInfo.getChildren().addAll(infoHeader, categoryLabel);
 
-        // ==================== KARTU KEDUA: DESKRIPSI ====================
+  
         VBox cardDesc = new VBox(6);
         cardDesc.setPadding(new Insets(15));
         cardDesc.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #E2E0D9; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
@@ -314,27 +314,28 @@ public class MainDashboardView {
         Label descContent = new Label(destination.getDescription());
         descContent.setWrapText(true);
 
-        // 1. Perkecil MaxWidth agar pas dengan ruang bersih kartu (380px - batas scrollbar)
+     
         descContent.setMaxWidth(360); 
 
-        // 2. Tambahkan -fx-padding: 0 10 0 0; (padding kanan 10px) agar teks tidak mepet ke scrollbar
+     
         descContent.setStyle("-fx-font-size: 13px; -fx-text-fill: #4F4F4F; -fx-line-spacing: 1.2; -fx-padding: 0 10 0 0;");
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(descContent);
-        // scrollPane.setFitToWidth(true);
-        scrollPane.setPrefHeight(90);   
-        scrollPane.setMinHeight(90); // ✨ TAMBAHKAN INI: Mengunci tinggi minimum agar tidak bisa digepengkan!
+        scrollPane.setFitToWidth(true);
+
+
+        scrollPane.setPrefHeight(150);   
+        scrollPane.setMinHeight(150); 
+        
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        // 2. Menghilangkan border abu-abu bawaan ScrollPane agar menyatu dengan kartu putih
+        
         scrollPane.setStyle("-fx-background-color: transparent; -fx-background: #FFFFFF; -fx-border-color: transparent; -fx-padding: 0;");
 
-        // 3. Masukkan scrollPane (bukan descContent langsung) ke dalam kontainer kartu
-        cardDesc.getChildren().addAll(descHeader, scrollPane, descContent);
+        cardDesc.getChildren().addAll(descHeader, scrollPane);
 
 
-        // ==================== KARTU KETIGA: LOKASI ====================
         VBox cardLoc = new VBox(6);
         cardLoc.setPadding(new Insets(15));
         cardLoc.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #E2E0D9; -fx-border-width: 1px; -fx-border-radius: 5px; -fx-background-radius: 5px;");
